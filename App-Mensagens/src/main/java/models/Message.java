@@ -12,16 +12,16 @@ public class Message {
     private String senderName;
     private String receiverName;
 
-    public Message(String senderAt, String receiverAt, String encryptedText) {
-        this.senderName = senderAt;
-        this.receiverName = receiverAt;
+    public Message(String sender, String receiver, String encryptedText) {
+        this.senderName = sender;
+        this.receiverName = receiver;
         this.encryptedMessage = encryptedText;
         this.sendedAt = LocalDateTime.now();
     }
 
-    private Message(String senderAt, String receiverAt, String encryptedText, LocalDateTime timestamp) {
-        this.senderName = senderAt;
-        this.receiverName = receiverAt;
+    private Message(String sender, String receiver, String encryptedText, LocalDateTime timestamp) {
+        this.senderName = sender;
+        this.receiverName = receiver;
         this.encryptedMessage = encryptedText;
         this.sendedAt = timestamp;
     }
