@@ -3,8 +3,9 @@ package models;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
+import org.bson.Document;
+
 
 public class Message {
     private LocalDateTime sendedAt;
@@ -24,6 +25,13 @@ public class Message {
         this.receiverName = receiver;
         this.encryptedMessage = encryptedText;
         this.sendedAt = timestamp;
+    }
+
+    public Document toDocument() {
+        return new Document("senderName", senderName)
+                .append("receiverName", receiverName)
+                .append("encryptedMessage", encryptedMessage)
+                .append("sendedAt", sendedAt);
     }
 
     /*salva nova mensagem no Mongo, utilizando a classe static MongoUtil (a ser implementada)
