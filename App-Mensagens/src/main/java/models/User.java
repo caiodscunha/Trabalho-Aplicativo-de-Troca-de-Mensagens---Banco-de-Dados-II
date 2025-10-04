@@ -39,7 +39,7 @@ public class User {
     /*Salva usuário no Mongo - true se foi criado, false se já existe usuário com
     as informações fornecidas
     * */
-    public boolean save() {
+    private boolean save() {
         if (existsByUsername(this.username) || existsByEmail(this.email)) return false;
         MongoHandler.insertDocument("users", this.toDocument());
         return true;
