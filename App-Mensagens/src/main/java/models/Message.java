@@ -37,8 +37,10 @@ public class Message {
     /*salva nova mensagem no Mongo, utilizando a classe static MongoUtil (a ser implementada)
 
      */
-    public void saveNewMessage() throws ExecutionControl.NotImplementedException {
-        throw new ExecutionControl.NotImplementedException("");
+    public void saveNewMessage() {
+        Document message = this.toDocument();
+
+        MongoHandler.insertDocument("messages", message);
     }
     /*carrega as mensagem no Mongo, utilizando a classe static MongoUtil (a ser implementada)
 
@@ -50,7 +52,6 @@ public class Message {
     public String getDecryptedMessage(String key) throws ExecutionControl.NotImplementedException {
         throw new ExecutionControl.NotImplementedException("");
     }
-
 
     public LocalDateTime getSendedAt() {
         return sendedAt;
