@@ -6,33 +6,33 @@ import models.Message;
 import java.util.List;
 
 public class MessageRepository {
-    private List<Message> messages;
+    private static List<Message> messages;
 
     /*Usa fetchByReceiver do message para salvar a lista de mensagens do usuário
 
      */
-    public static MessageRepository loadMessagesForReceiver(String receiver) throws ExecutionControl.NotImplementedException {
-        throw new ExecutionControl.NotImplementedException("");
+    public static void loadMessagesForReceiver(String receiver) {
+        messages = Message.fetchByReceiver(receiver);
     }
 
     public boolean isEmpty() {
-        return this.messages.isEmpty();
+        return messages.isEmpty();
     }
 
     public int size() {
-        return this.messages.size();
+        return messages.size();
     }
 
     public Message getByIndex(int index) {
-        if (index < 0 || index >= this.messages.size()) {
+        if (index < 0 || index >= messages.size()) {
             throw new IndexOutOfBoundsException("Índice inválido.");
         }
-        return this.messages.get(index);
+        return messages.get(index);
     }
 
     public void printSummary() {
-        for (int i = 0; i < this.messages.size(); i++) {
-            Message msg = this.messages.get(i);
+        for (int i = 0; i < messages.size(); i++) {
+            Message msg = messages.get(i);
             System.out.println(i + " - De @" + msg.getSenderName() + " [" + msg.getSendedAt() + "]");
         }
     }
