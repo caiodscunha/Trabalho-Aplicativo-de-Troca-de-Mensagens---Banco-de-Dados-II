@@ -50,7 +50,7 @@ public class Message {
     public void saveNewMessage() {
         Document message = this.toDocument();
 
-        MongoHandler.insertDocument("messages", message);
+        MongoHandler.insertDocument(COLLECTION_NAME, message);
     }
     /*carrega as mensagem no Mongo, utilizando a classe static MongoUtil (a ser implementada)
 
