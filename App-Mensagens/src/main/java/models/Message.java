@@ -17,10 +17,10 @@ public class Message {
     private String senderName;
     private String receiverName;
 
-    public Message(String sender, String receiver, String encryptedText) {
+    public Message(String sender, String receiver, String message, String key) throws Exception {
         this.senderName = sender;
         this.receiverName = receiver;
-        this.encryptedMessage = encryptedText;
+        this.encryptedMessage = CryptographyHandler.encrypt(message, key);
         this.sendedAt = LocalDateTime.now();
     }
 
@@ -70,8 +70,8 @@ public class Message {
         return messages;
     }
 
-    public String getDecryptedMessage(String key) throws ExecutionControl.NotImplementedException {
-        throw new ExecutionControl.NotImplementedException("");
+    public String getDecryptedMessage(String key) throws Exception{
+        return CryptographyHandler.decrypt(this.encryptedMessage, key);
     }
 
     public LocalDateTime getSendedAt() {
