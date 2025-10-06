@@ -82,4 +82,9 @@ public class Message {
         return senderName;
     }
 
+    @Override
+    public String toString() {
+        return (" - De @" + this.senderName + " [" + this.sendedAt + "]");
+    }
+
 }

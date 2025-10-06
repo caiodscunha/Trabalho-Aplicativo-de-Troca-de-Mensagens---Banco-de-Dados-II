@@ -33,7 +33,8 @@ public class MessageRepository {
     public void printSummary() {
         for (int i = 0; i < messages.size(); i++) {
             Message msg = messages.get(i);
-            System.out.println(i + " - De @" + msg.getSenderName() + " [" + msg.getSendedAt() + "]");
+            System.out.print(i);
+            System.out.println(msg.toString());
         }
     }
 
