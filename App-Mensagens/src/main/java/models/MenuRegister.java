@@ -7,21 +7,26 @@ public class MenuRegister {
 
     public void chooseOption()
     {
-        this.showOptions();
-        int option = scanner.nextInt();
+        int option = 0;
 
-        switch (option) {
-            case 1:
-                registerUser();
-                break;
-            case 2:
-                loginUser();
-                break;
-            case 3:
-                System.out.println("Saindo...");
-                break;
-            default:
-                System.out.println("Opção inválida");
+        while (option != 3)
+        {
+            this.showOptions();
+            option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    registerUser();
+                    break;
+                case 2:
+                    loginUser();
+                    break;
+                case 3:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida");
+            }
         }
     }
 
