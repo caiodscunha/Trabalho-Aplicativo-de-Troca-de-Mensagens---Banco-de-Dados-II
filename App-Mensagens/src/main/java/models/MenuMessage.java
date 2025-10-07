@@ -1,8 +1,17 @@
 package models;
+import repository.MessageRepository;
+
 import java.util.Scanner;
 
 public class MenuMessage {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
+    private final String receiverName;
+    private final MessageRepository messageRepository = new MessageRepository();
+
+    public MenuMessage(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
 
     public void chooseOption()
     {
@@ -39,7 +48,10 @@ public class MenuMessage {
 
     public void seeMessages()
     {
-
+        MessageRepository.loadMessagesForReceiver(receiverName);
+        messageRepository.printSummary();
+        System.out.println("Aperte ENTER para voltar para o menu!");
+        scanner.nextLine();
     }
 
     public void sendMessage()
