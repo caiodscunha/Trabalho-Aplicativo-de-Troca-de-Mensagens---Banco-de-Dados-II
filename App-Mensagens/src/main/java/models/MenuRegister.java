@@ -77,7 +77,17 @@ public class MenuRegister {
             System.out.println("Envie todos os campos!");
             return;
         }
+        User user = User.login(email, password);
+
+        if (user == null) {
+            System.out.println("Email ou senha incorretos!");
+        } else {
+            System.out.println("Login realizado com sucesso!");
+            System.out.println("Bem-vindo, " + user.getUsername() + "!");
+        }
     }
+
+
 
 
 }
