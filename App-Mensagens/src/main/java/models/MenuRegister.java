@@ -17,13 +17,13 @@ public class MenuRegister {
             switch (option) {
                 case 1:
                     registerUser();
-                    break;
+                    return;
                 case 2:
                     loginUser();
-                    break;
+                    return;
                 case 3:
                     System.out.println("Saindo...");
-                    break;
+                    return;
                 default:
                     System.out.println("Opção inválida");
             }

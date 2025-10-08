@@ -23,13 +23,13 @@ public class MenuMessage {
             switch (option) {
                 case 1:
                     seeMessages();
-                    break;
+                    return;
                 case 2:
                     sendMessage();
-                    break;
+                    return;
                 case 3:
                     System.out.println("Saindo...");
-                    break;
+                    return;
                 default:
                     System.out.println("Opção inválida");
             }
