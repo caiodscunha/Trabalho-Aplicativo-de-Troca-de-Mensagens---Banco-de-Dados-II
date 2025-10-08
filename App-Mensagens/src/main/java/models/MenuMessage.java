@@ -68,12 +68,5 @@ public class MenuMessage {
         catch (Exception e) {
             System.out.println("Erro ao enviar mensagem");
         }
-
-
-
-
-
     }
-
-
 }
