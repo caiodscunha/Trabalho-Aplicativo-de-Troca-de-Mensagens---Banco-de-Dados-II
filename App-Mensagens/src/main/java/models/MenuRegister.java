@@ -55,7 +55,13 @@ public class MenuRegister {
             return;
         }
 
+        User user = User.register(username, email, password);
 
+        if (user == null) {
+            System.out.println("Usuário ou email já existem!");
+        } else {
+            System.out.println("Usuário registrado com sucesso: " + user);
+        }
     }
 
     public void loginUser()
