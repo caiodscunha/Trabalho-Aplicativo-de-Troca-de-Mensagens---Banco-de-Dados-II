@@ -3,7 +3,7 @@ package models;
 import java.util.Scanner;
 
 public class MenuRegister {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public void chooseOption()
     {
@@ -40,12 +40,37 @@ public class MenuRegister {
 
     public void registerUser()
     {
+        System.out.println("Username: ");
+        String username = scanner.next();
+
+        System.out.println("Email: ");
+        String email = scanner.next();
+
+        System.out.println("Password: ");
+        String password = scanner.next();
+
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty())
+        {
+            System.out.println("Envie todos os campos!");
+            return;
+        }
+
 
     }
 
     public void loginUser()
     {
+        System.out.println("Email: ");
+        String email = scanner.next();
 
+        System.out.println("Password: ");
+        String password = scanner.next();
+
+        if (email.isEmpty() || password.isEmpty())
+        {
+            System.out.println("Envie todos os campos!");
+            return;
+        }
     }
 
 
