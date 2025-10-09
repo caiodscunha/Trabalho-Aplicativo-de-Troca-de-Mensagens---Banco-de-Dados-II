@@ -32,6 +32,7 @@ public class MenuRegister {
 
     private void showOptions()
     {
+        System.out.println("\n=== MENU DE CADASTRO ===");
         System.out.println("Select an option:");
         System.out.println("1 - Registrar");
         System.out.println("2 - Login");

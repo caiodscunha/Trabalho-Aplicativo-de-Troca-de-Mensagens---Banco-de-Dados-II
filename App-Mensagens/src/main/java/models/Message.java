@@ -1,13 +1,9 @@
 package models;
 
-import jdk.jshell.spi.ExecutionControl;
-
-import java.io.ObjectStreamException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
-
 
 public class Message {
     private static final String COLLECTION_NAME = "messages";
@@ -35,14 +31,15 @@ public class Message {
         return new Document("senderName", senderName)
                 .append("receiverName", receiverName)
                 .append("encryptedMessage", encryptedMessage)
-                .append("sendedAt", sendedAt);
+                .append("sendedAt", java.util.Date.from(
+                        sendedAt.atZone(java.time.ZoneId.systemDefault()).toInstant()
+                ));
     }
 
     public static Message documentToMessage(Document d) {
         if (d == null) return null;
 
-        // Corrige o nome da chave e converte Date -> LocalDateTime
-        var date = d.getDate("sendedAt"); // o tipo real salvo no Mongo
+        var date = d.getDate("sendedAt");
         LocalDateTime timestamp = date != null
                 ? date.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDateTime()
                 : null;
@@ -55,18 +52,10 @@ public class Message {
         );
     }
 
-
-    /*salva nova mensagem no Mongo, utilizando a classe static MongoUtil (a ser implementada)
-
-     */
     public void saveNewMessage() {
-        Document message = this.toDocument();
-
-        MongoHandler.insertDocument(COLLECTION_NAME, message);
+        MongoHandler.insertDocument(COLLECTION_NAME, this.toDocument());
     }
-    /*carrega as mensagem no Mongo, utilizando a classe static MongoUtil (a ser implementada)
 
-     */
     public static List<Message> fetchByReceiver(String receiver) {
         Document query = new Document("receiverName", receiver);
 
@@ -75,14 +64,12 @@ public class Message {
 
         for (Document doc : messagesDocuments) {
             Message message = documentToMessage(doc);
-            if (message != null) {
-                messages.add(message);
-            }
+            if (message != null) messages.add(message);
         }
         return messages;
     }
 
-    public String getDecryptedMessage(String key) throws Exception{
+    public String getDecryptedMessage(String key) throws Exception {
         return CryptographyHandler.decrypt(this.encryptedMessage, key);
     }
 
@@ -96,7 +83,15 @@ public class Message {
 
     @Override
     public String toString() {
-        return (" - De @" + this.senderName + " [" + this.sendedAt + "]");
+        return "De @" + senderName + " [" + sendedAt + "]";
     }
 
+    public String showMessageWithKey(String key) {
+        try {
+            String decrypted = getDecryptedMessage(key);
+            return "De @" + senderName + " [" + sendedAt + "]: " + decrypted;
+        } catch (Exception e) {
+            return "Chave incorreta para mensagem de @" + senderName;
+        }
+    }
 }
