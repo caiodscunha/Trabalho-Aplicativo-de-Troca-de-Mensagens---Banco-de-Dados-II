@@ -41,8 +41,20 @@ public class Message {
     public static Message documentToMessage(Document d) {
         if (d == null) return null;
 
-        return new Message(d.getString("senderName"), d.getString("receiverName"), d.getString("encryptedMessage"), (LocalDateTime) d.get( "sendetAt"));
+        // Corrige o nome da chave e converte Date -> LocalDateTime
+        var date = d.getDate("sendedAt"); // o tipo real salvo no Mongo
+        LocalDateTime timestamp = date != null
+                ? date.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDateTime()
+                : null;
+
+        return new Message(
+                d.getString("senderName"),
+                d.getString("receiverName"),
+                d.getString("encryptedMessage"),
+                timestamp
+        );
     }
+
 
     /*salva nova mensagem no Mongo, utilizando a classe static MongoUtil (a ser implementada)
 

@@ -17,13 +17,13 @@ public class MenuRegister {
             switch (option) {
                 case 1:
                     registerUser();
-                    return;
+                    break;
                 case 2:
                     loginUser();
-                    return;
+                    break;
                 case 3:
                     System.out.println("Saindo...");
-                    return;
+                    break;
                 default:
                     System.out.println("Opção inválida");
             }
@@ -77,6 +77,7 @@ public class MenuRegister {
             System.out.println("Envie todos os campos!");
             return;
         }
+
         User user = User.login(email, password);
 
         if (user == null) {
@@ -84,6 +85,12 @@ public class MenuRegister {
         } else {
             System.out.println("Login realizado com sucesso!");
             System.out.println("Bem-vindo, " + user.getUsername() + "!");
+            MenuMessage menuMessage = new MenuMessage(user.getUsername());
+            try {
+                menuMessage.chooseOption();
+            } catch (Exception e) {
+                System.out.println("Erro ao acessar o menu de mensagens: " + e.getMessage());
+            }
         }
     }
 
